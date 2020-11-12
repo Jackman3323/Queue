@@ -38,12 +38,15 @@ public class Queue <T>{
     }
     //public QueueNode peek(): return the QueueNode that is first in line, do not remove
     public T peek(){
+        if(this.firstInLine == null){
+            return null;
+        }
         return this.firstInLine.get();
     }
 
     //MUTATORS
     //OVERLOADED: public void enqueue(T data): this version creates a new QueueNode with Object Data inside it
-    public void enqueue(Object Data){
+    public void enqueue(T Data){
         QueueNode data = new QueueNode(Data);
         if(this.firstInLine == null){
             //This is the first QueueNode
@@ -81,6 +84,9 @@ public class Queue <T>{
     }
     //public QueueNode dequeue(): removes and returns the QueueNode that is first in line
     public T dequeue(){
+        if(this.size == 0){
+            return null;
+        }
         //Keep track of thing to return
         QueueNode<T> toReturn =  this.firstInLine;
         //Variable to move up through the Queue until we get to second in line
@@ -94,6 +100,8 @@ public class Queue <T>{
         this.firstInLine = curNode;
         //Set that QueueNode's parent pointer to null, there's nobody in front of it
         curNode.setParent(null);
+        //Update size
+        this.size--;
         //Return former first-in-line QueueNode
         return toReturn.get();
     }
