@@ -68,5 +68,3 @@ public class QueueNode <T> {
         return this.t.equals(n.get());
     }
 }
-
-
